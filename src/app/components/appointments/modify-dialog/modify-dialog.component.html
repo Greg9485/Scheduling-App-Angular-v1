@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>Modifying Appointment</h1>
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <label>Appointment ID: </label><br>
+                <input matInput class="input-1" [(ngModel)]="data.appointmentId" disabled>
+            </div>
+
+            <div class="row">
+                <label>User ID: </label><br>
+                <input matInput class="input-1" [(ngModel)]="data.userId">
+            </div>
+
+            <div class="row">
+                <label>Appointment Title: </label><br>
+                <input matInput class="input-1" [(ngModel)]="data.appointmentTitle">
+            </div>
+
+            <div class="row">
+                <label>Start Date: </label><br>
+                <input matInput class="input-1" [(ngModel)]="data.startDate">
+            </div>
+
+            <div class="row">
+                <label>Start Time: </label><br>
+                <input matInput class="input-1" [(ngModel)]="data.startTime">
+            </div>
+
+            <div class="row">
+                <label>End Date: </label><br>
+                <input matInput class="input-1" [(ngModel)]="data.endDate">
+            </div>
+
+            <div class="row">
+                <label>End Time: </label><br>
+                <input matInput  class="input-1" [(ngModel)]="data.endTime">
+            </div>
+
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="button-secondary" (click)="onNoClick()">Cancel</button>
+  &nbsp;
+  <button mat-button [mat-dialog-close]="data.userId" cdkFocusInitial class="button-primary">Update</button>
+</div>
+
+

@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Add Appointment</h1>
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col">
+
+            <div class="row">
+                <label>User ID: </label><br>
+                <input matInput class="input-1" [(ngModel)]="userId">
+            </div>
+
+            <div class="row">
+                <label>Appointment Title: </label><br>
+                <input matInput class="input-1" [(ngModel)]="appointmentTitle">
+            </div>
+
+            <div class="row">
+                <label>Start Date: </label><br>
+                <input matInput class="input-1" [(ngModel)]="startDate">
+            </div>
+
+            <div class="row">
+                <label>Start Time: </label><br>
+                <input matInput class="input-1" [(ngModel)]="startTime">
+            </div>
+
+            <div class="row">
+                <label>End Date: </label><br>
+                <input matInput class="input-1" [(ngModel)]="endDate">
+            </div>
+
+            <div class="row">
+                <label>End Time: </label><br>
+                <input matInput class="input-1" [(ngModel)]="endTime">
+            </div>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" class="button-secondary">Cancel</button>
+  &nbsp;
+  <button mat-button [mat-dialog-close]="data.userId" cdkFocusInitial class="button-primary">Add</button>
+</div>
+
+

@@ -1,0 +1,32 @@
+<div class='row'>
+
+    <div class="col">
+        <div class="row" style="background: rgb(0, 100, 167); margin-left: 5%; margin-top: 5%; height: 25px; width: 85%">
+            <p style="text-align: center; margin-top: 2%; font-weight: 700; color: white;">CUSTOMERS</p>
+        </div>
+        <div class="row">
+            <ag-grid-angular 
+                style="width: 85%; height: 250px; margin-right: 5%; margin-left: 5%;" 
+                class="ag-theme-balham-dark"
+                [rowData]="rowData" 
+                [columnDefs]="columnDefs"
+                [rowSelection]="rowSelection"
+                [rowMultiSelectWithClick]="true"
+                [animateRows]="true"
+                (cellClicked)="onRowSelected($event)"
+                >
+            </ag-grid-angular>       
+        </div>
+
+        <div class="row" style="background: rgb(0, 100, 167); margin-left: 5%; height: 50px; width: 85%">
+           
+                <button style="margin-left: 35%; margin-top: 1%; height: 30px" (click)="addCustomer()">Add Customer</button>
+                &nbsp;
+                <button style="margin-top: 1%; height: 30px" (click)="deleteCustomer()">Delete Customer</button>
+                &nbsp;
+                <button style="margin-top: 1%; height: 30px" (click)="modifyCustomer()">Modify Customer</button>
+            
+            
+        </div>
+    </div>
+</div>

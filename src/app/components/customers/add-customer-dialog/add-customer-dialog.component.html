@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Adding Customer</h1>
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <label>Customer Name: </label><br>
+                <input matInput class="input-1" [(ngModel)]="customerName">
+            </div>
+
+            <div class="row">
+                <label>Address: </label><br>
+                <input matInput class="input-1" [(ngModel)]="customerAddress">
+            </div>
+
+            <div class="row">
+                <label>State/Province: </label><br>
+                <input matInput class="input-1" [(ngModel)]="customerStateProvince">
+            </div>
+
+            <div class="row">
+                <label>Zip Code: </label><br>
+                <input matInput class="input-1" [(ngModel)]="customerZipCode">
+            </div>
+
+            <div class="row">
+                <label>Phone Number: </label><br>
+                <input matInput class="input-1" [(ngModel)]="customerPhoneNumber">
+            </div>
+
+            <div class="row">
+                <label>Active: </label><br>
+                <input matInput class="input-1" [(ngModel)]="customerActive">
+            </div>
+
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="button-secondary" (click)="onNoClick()">Cancel</button>
+  &nbsp;
+  <button mat-button class="button-primary" [mat-dialog-close]="" cdkFocusInitial>Add</button>
+</div>
+
+

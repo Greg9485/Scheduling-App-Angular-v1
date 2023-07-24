@@ -1,0 +1,19 @@
+<div>
+    <div class="row" style="padding: 10px; margin-left: 35%; margin-right: 5%; margin-top: 5%">
+        <div class="col" style="padding-bottom: 2px; width: 25%; border: gray 2px solid">
+            <div class="row" style="padding-bottom: 2px; margin-left: 10%; margin-top: 2%;">
+                <input class="input-1" placeholder="Enter User Name" [(ngModel)]="userName" (keyup)="onSubmit()">
+            </div>
+            <div class="row" style="padding-bottom: 2px; margin-left: 10%; margin-top: 2%;">
+                <input class="input-1" placeholder="Enter Password" [(ngModel)]="password" (keyup)="onSubmit()">
+            </div>
+            <div class="row" style="margin-left: 50%; margin-top: 5%; margin-bottom: 2%;">
+                <button class="button-primary">
+                    <a routerLink="/appointments" *ngIf="allowLogin" style="color: white">Login</a>
+                    <a routerLink="##" *ngIf="!allowLogin" (click)="invalidCredentials()" style="color: white">Login</a>
+                </button>
+                <!--button class="button-primary" (click)="signUp()">Sign Up</button-->
+            </div>
+        </div>
+    </div>
+</div>
