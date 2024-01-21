@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CellClickedEvent, ColDef } from 'ag-grid-community';
+import { CellClickedEvent, ColDef, GridApi, GridOptions, GridReadyEvent } from 'ag-grid-community';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { ModifyDialogComponent } from './modify-dialog/modify-dialog.component';
-import {OverlayModule } from '@angular/cdk/overlay'
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
+import { AppointmentService } from 'src/app/service/appointment.service';
+import { Appointment } from 'src/app/model/appointment';
 
 @Component({
   selector: 'app-appointments',
@@ -12,11 +13,18 @@ import { AddDialogComponent } from './add-dialog/add-dialog.component';
 })
 export class AppointmentsComponent implements OnInit {
 
+  private gridApi!: GridApi<Appointment>;
+  rowData: Appointment[] = [];
+  selectedAppointment: any;
+  rowSelection: any;
+  showDeletedMessage: boolean = false;  
+  showAddedMessage: boolean = false;
+  showModifiedMessage: boolean = false;
+
   columnDefs: any = [
-    {headerName: 'Appointment ID', field: 'appointmentId', sortable: true, filter: true},
-    {headerName: 'User ID', field: 'userId', sortable: true, filter: true},
-    {headerName: 'Customer ID', field: 'customerId', sortable: true, filter: true},
-    {headerName: 'Appointment Title', field: 'appointmentTitle', sortable: true, filter: true},
+    {headerName: 'Employee Name', field: 'employeeName', sortable: true, filter: true},
+    {headerName: 'Customer Name', field: 'customerName', sortable: true, filter: true},
+    {headerName: 'Appointment Title', field: 'title', sortable: true, filter: true},
     {headerName: 'Start Date', field: 'startDate', sortable: true, filter: true},
     {headerName: 'Start Time', field: 'startTime', sortable: true, filter: true},
     {headerName: 'End Date', field: 'endDate', sortable: true, filter: true},
@@ -28,24 +36,22 @@ export class AppointmentsComponent implements OnInit {
     filter: true
   }
 
-
-  rowData=[
-    {appointmentId: '1', userId: '3', customerId: '102', appointmentTitle: 'Our First Customer Meeting', startDate: '07/24/2023', startTime: '10:00 AM', endDate: '07/24/2023', endTime: '12:00 PM'},
-    {appointmentId: '2', userId: '5', customerId: '100', appointmentTitle: 'Our First Customer Meeting', startDate: '07/26/2023', startTime: '11:30 AM', endDate: '07/26/2023', endTime: '02:00 PM'},
-    {appointmentId: '3', userId: '1', customerId: '101', appointmentTitle: 'Our First Customer Meeting', startDate: '07/29/2023', startTime: '09:00 AM', endDate: '07/29/2023', endTime: '11:00 AM'},
-    {appointmentId: '4', userId: '2', customerId: '125', appointmentTitle: 'Our First Customer Meeting', startDate: '07/23/2023', startTime: '11:00 AM', endDate: '07/23/2023', endTime: '01:00 PM'},
-    {appointmentId: '5', userId: '5', customerId: '135', appointmentTitle: 'Our First Customer Meeting', startDate: '07/25/2023', startTime: '01:00 pM', endDate: '07/25/2023', endTime: '03:00 PM'},
-    {appointmentId: '6', userId: '4', customerId: '144', appointmentTitle: 'Our First Customer Meeting', startDate: '07/27/2023', startTime: '07:00 pM', endDate: '07/27/2023', endTime: '08:00 PM'},
-    {appointmentId: '7', userId: '3', customerId: '102', appointmentTitle: 'Our First Customer Meeting', startDate: '07/29/2023', startTime: '12:00 PM', endDate: '07/29/2023', endTime: '02:00 PM'},
-  ]
-
-  selectedAppointment: any;
-  rowSelection: any;
-
-
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, 
+              public appointmentService: AppointmentService) { }
 
   ngOnInit(): void {
+  }
+
+  onGridReady(params: GridReadyEvent<Appointment>) {
+    this.gridApi = params.api;    
+    this.populateRowData();
+  }
+
+  populateRowData(){
+    this.appointmentService.getAllAppointments().subscribe(data => {
+       this.gridApi.setRowData([]);
+      this.gridApi.setRowData(data.appointmentVOList);
+    })
   }
 
   addAppointment(){
@@ -54,8 +60,15 @@ export class AppointmentsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('dialog was closed')
-      this.rowSelection = result;
+      if(result == "Success"){
+        this.showAddedMessage = true;
+        this.populateRowData();
+        setTimeout(() =>{
+          this.showAddedMessage = false;
+        }, 3000) 
+       }else{
+        window.alert("Save failed.")
+      }
     })
   }
 
@@ -64,7 +77,21 @@ export class AppointmentsComponent implements OnInit {
       const err = window.alert("Please select a row to delete.")
       return;
     }else{
-      console.log(JSON.stringify(this.rowSelection, null, 4))
+      const alrt = window.confirm("Are you sure you want to delete the appointment for " + 
+      this.rowSelection.title + "?");
+      if(alrt){
+        this.appointmentService.deleteAppointment(this.rowSelection.appointmentId).subscribe(result =>{
+          if(result == "Success"){      
+            this.showDeletedMessage = true;
+            this.populateRowData();
+            setTimeout(() =>{
+              this.showDeletedMessage = false;
+            }, 3000)
+          }else{
+            window.alert("Delete failed");
+          }
+        });
+      }
     }
     
   }
@@ -75,30 +102,36 @@ export class AppointmentsComponent implements OnInit {
       return;
     }else{
       this.openModifyDialog();
-      console.log(JSON.stringify(this.rowSelection, null, 4))
     }
   }
 
   onRowSelected(event: CellClickedEvent){
     this.rowSelection = null;
     this.rowSelection = event.data
-    console.log(JSON.stringify(this.rowSelection, null, 4))
   }
 
   openModifyDialog(): void{
     const dialogRef = this.dialog.open(ModifyDialogComponent, {
-      width: '350px',
-      data: {appointmentId: this.rowSelection.appointmentId, userId: this.rowSelection.userId, customerId: this.rowSelection.customerId, 
-        appointmentTitle: this.rowSelection.appointmentTitle, startDate: this.rowSelection.startDate, startTime: this.rowSelection.startTime,
-         endDate: this.rowSelection.endDate, endTime: this.rowSelection.endTime}
+      width: '65%',
+      data: {
+        appointmentId: this.rowSelection.appointmentId, 
+        employeeId: this.rowSelection.employeeId, 
+        customerId: this.rowSelection.customerId, 
+        title: this.rowSelection.title, 
+        startDate: this.rowSelection.startDate, 
+        startTime: this.rowSelection.startTime,
+        endDate: this.rowSelection.endDate, 
+        endTime: this.rowSelection.endTime
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('dialog was closed')
-      this.rowSelection = result;
+      this.showModifiedMessage = true;
+      this.populateRowData();
+      setTimeout(() =>{
+        this.showModifiedMessage = false;
+      }, 3000)
     })
   }
-
-
-
+  
 }

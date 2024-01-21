@@ -12,3 +12,9 @@ export interface ModifyDialogData{
     endTime: string;
 
 }
+
+export interface Employee{
+    employeeId: number;
+    employeeName: string;
+    email: string;
+}

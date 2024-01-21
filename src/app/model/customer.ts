@@ -1,16 +1,17 @@
 import { Appointment } from "./appointment";
 
 export class Customer {
-    id: number;
-    name: string;
+    customerId: number;
+    customerName: string;
     address: string;
-    stateProvince: string;
+    //stateProvince: string;
+    //country: string;
     zipCode: string;
     phoneNumber: string;
-    active: string;
+    isActive: string;
     createdDate: Date;
-    createdTime: string;
+   // createdTime: string;
     lastUpdated: Date;
     lastUpdatedBy: number; //userID
-    appointments: Appointment[];
+   // appointments: Appointment[];*/
 }

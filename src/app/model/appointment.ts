@@ -3,12 +3,12 @@ import { User } from "./user";
 
 export class Appointment {
     appointmentId: number;
-    userId: string;
-    customerId: string;
-    appointmentTitle: string;
-    startDate: Date;
+    employeeId: number;
+    customerId: number;
+    title: string;
+    startDate: string;
     startTime: string;
-    endDate: Date;
+    endDate: string;
     endTime: string;
     /*id: number;
     appointmentTitle: string;
@@ -22,7 +22,7 @@ export class Appointment {
     createdDate: Date;
     createdTime: string;
     createdBy: User;
-    lastUpdated: string;
-    lastUpdatedBy: number; //userID
+    lastUpdated: Date;
+    lastUpdatedBy: string; //userID
     
 }

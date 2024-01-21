@@ -1,6 +1,6 @@
 <div class='row'>
 
-    <div class="col">
+    <div class="col" style="margin-left: 10%; max-width: 85%;">
         <div class="row" style="background: rgb(0, 100, 167); margin-left: 5%; margin-top: 5%; height: 25px; width: 85%">
             <p style="text-align: center; margin-top: 2%; font-weight: 700; color: white;">APPOINTMENTS</p>
         </div>
@@ -13,21 +13,37 @@
                 [rowSelection]="rowSelection"
                 [rowMultiSelectWithClick]="true"
                 [animateRows]="true"
+                (gridReady)="onGridReady($event)"
                 (cellClicked)="onRowSelected($event)"
                 >
             </ag-grid-angular>       
         </div>
 
-        <div class="row" style="background: rgb(0, 100, 167); margin-left: 5%; height: 50px; width: 85%">
-           
-                <button style="margin-left: 35%; margin-top: 1%; height: 30px" (click)="addAppointment()">Add Appointment</button>
+        <div class="row" style="background: #0064a7; margin-left: 5%; height: 35%; width: 85%; ">
+            <div class="row" style="margin-left: 25%;">
+                <button class="button-secondary" style="margin-top: 1%; margin-bottom: 1%; padding-bottom: 1%; height: 70%" (click)="addAppointment()">Add Appointment</button>
                 &nbsp;
-                <button style="margin-top: 1%; height: 30px" (click)="deleteAppointment()">Delete Appointment</button>
+                <button class="button-secondary" style="margin-top: 1%; margin-bottom: 1%; padding-bottom: 1%; height: 70%" (click)="deleteAppointment()">Delete Appointment</button>
                 &nbsp;
-                <button style="margin-top: 1%; height: 30px" (click)="modifyAppointment()">Modify Appointment</button>
-            
-            
+                <button class="button-secondary" style="margin-top: 1%; margin-bottom: 1%; padding-bottom: 1%; height: 70%" (click)="modifyAppointment()">Modify Appointment</button>
+            </div>            
         </div>
     </div>
 </div>
+
+<div class="row" style="text-align: center; margin-left: 5%; margin-top: 5%; height: 20%;">
+    <div *ngIf="this.showDeletedMessage">
+        <label *ngIf="this.showDeletedMessage" class="success-notification">Appointment successfully deleted</label>
+    </div>
+
+    <div>
+        <label *ngIf="this.showAddedMessage" class="success-notification">Appointment successfully added</label>
+    </div>
+
+    <div>
+        <label *ngIf="this.showModifiedMessage" class="success-notification">Appointment successfully modified</label>
+    </div>
+
+</div>
+
 

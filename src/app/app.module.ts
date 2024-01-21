@@ -16,7 +16,14 @@ import { AddDialogComponent } from './components/appointments/add-dialog/add-dia
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddCustomerDialogComponent } from './components/customers/add-customer-dialog/add-customer-dialog.component';
 import { ModifyCustomerDialogComponent } from './components/customers/modify-customer-dialog/modify-customer-dialog.component';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatNativeDateModule} from '@angular/material/core';
+import { CalendarModule, DatePickerModule, TimePickerModule, DateRangePickerModule, DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { HttpClient } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+//import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 
 function sendToLoginPage(injector: Injector){
@@ -46,7 +53,9 @@ const routes: Routes = [
     ModifyDialogComponent,
     AddDialogComponent,
     AddCustomerDialogComponent,
-    ModifyCustomerDialogComponent,     
+    ModifyCustomerDialogComponent,  
+
+    
   ],
   imports: [
     BrowserModule,
@@ -55,7 +64,15 @@ const routes: Routes = [
     FormsModule,
     AgGridModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    CalendarModule, DatePickerModule, TimePickerModule, DateRangePickerModule, DateTimePickerModule,
+    HttpClientModule
+    //NgxMaterialTimepickerModule
+//    NgxMaterialTimepickerModule
   ],
   exports: [RouterModule],
   providers: [],

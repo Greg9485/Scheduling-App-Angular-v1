@@ -1,6 +1,6 @@
 <div class='row'>
 
-    <div class="col">
+    <div class="col" style="margin-left: 10%; max-width: 85%;">
         <div class="row" style="background: rgb(0, 100, 167); margin-left: 5%; margin-top: 5%; height: 25px; width: 85%">
             <p style="text-align: center; margin-top: 2%; font-weight: 700; color: white;">CUSTOMERS</p>
         </div>
@@ -14,19 +14,37 @@
                 [rowMultiSelectWithClick]="true"
                 [animateRows]="true"
                 (cellClicked)="onRowSelected($event)"
+                (gridReady)="onGridReady($event)"
                 >
             </ag-grid-angular>       
         </div>
-
-        <div class="row" style="background: rgb(0, 100, 167); margin-left: 5%; height: 50px; width: 85%">
-           
-                <button style="margin-left: 35%; margin-top: 1%; height: 30px" (click)="addCustomer()">Add Customer</button>
+                
+        <div class="row" style="background: #0064a7; margin-left: 5%; height: 35%; width: 85%; ">
+            <div class="row" style="margin-left: 25%;">
+                <button class="button-secondary" style="margin-top: 1%; margin-bottom: 1%; margin-right: 2%; padding-bottom: 1%; height: 70%" (click)="addCustomer()">Add Customer</button>
                 &nbsp;
-                <button style="margin-top: 1%; height: 30px" (click)="deleteCustomer()">Delete Customer</button>
+                <button class="button-secondary" style="margin-top: 1%; margin-bottom: 1%; margin-right: 2%; padding-bottom: 1%; height: 70%" (click)=" checkForAppointments()">Delete Customer</button>
                 &nbsp;
-                <button style="margin-top: 1%; height: 30px" (click)="modifyCustomer()">Modify Customer</button>
-            
-            
+                <button class="button-secondary" style="margin-top: 1%; margin-bottom: 1%; padding-bottom: 1%; height: 70%"  (click)="modifyCustomer()">Modify Customer</button>
+            </div>            
         </div>
+    </div>    
+</div>
+
+<div class="row" style="text-align: center; margin-left: 5%; margin-top: 5%; height: 20%;">
+    <div>
+        <label *ngIf="this.showDeletedMessage" class="success-notification">Customer successfully deleted</label>
+    </div>
+
+    <div>
+        <label *ngIf="this.showDeletedCanceledMessage" class="cancel-notification">Customer NOT deleted</label>
+    </div>
+
+    <div>
+        <label *ngIf="this.showAddedMessage" class="success-notification">Customer successfully added</label>
+    </div>
+
+    <div>
+        <label *ngIf="this.showModifiedMessage" class="success-notification">Customer successfully modified</label>
     </div>
 </div>

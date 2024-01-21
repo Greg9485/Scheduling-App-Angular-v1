@@ -2,35 +2,44 @@
 <div mat-dialog-content>
     <div class="row">
         <div class="col">
+            <div class="row">
+                <label>Employee: </label><br>
+                <select class="input-1"  style="width: 75%" [(ngModel)]="employeeName">
+                    <option selected disabled>--Select Employee--</option>
+                    <option *ngFor="let e of employees">{{e.employeeName}}</option>
+                </select>
+            </div>
 
             <div class="row">
-                <label>User ID: </label><br>
-                <input matInput class="input-1" [(ngModel)]="userId">
+                <label>Customer: </label><br>
+                <select class="input-1"  style="width: 75%" [(ngModel)]="cust">
+                    <option *ngFor="let customer of customers">{{customer.customerName}}</option>
+                </select>
             </div>
 
             <div class="row">
                 <label>Appointment Title: </label><br>
-                <input matInput class="input-1" [(ngModel)]="appointmentTitle">
+                <input class="input-1" [(ngModel)]="appointmentTitle">
             </div>
 
             <div class="row">
-                <label>Start Date: </label><br>
-                <input matInput class="input-1" [(ngModel)]="startDate">
+                <div class="row">
+                    <mat-label>Start Date/Time</mat-label>
+                </div>
+
+                <div class="row">
+                    <input type="datetime-local" class="input-1" [(ngModel)]="startDateTime" >
+                </div>
             </div>
 
             <div class="row">
-                <label>Start Time: </label><br>
-                <input matInput class="input-1" [(ngModel)]="startTime">
-            </div>
-
-            <div class="row">
-                <label>End Date: </label><br>
-                <input matInput class="input-1" [(ngModel)]="endDate">
-            </div>
-
-            <div class="row">
-                <label>End Time: </label><br>
-                <input matInput class="input-1" [(ngModel)]="endTime">
+                <div class="row">
+                    <mat-label>End Date/Time</mat-label>
+                </div>
+                
+                <div class="row">
+                    <input type="datetime-local" class="input-1" [(ngModel)]="endDateTime" >
+                </div>
             </div>
         </div>
     </div>
@@ -38,7 +47,7 @@
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()" class="button-secondary">Cancel</button>
   &nbsp;
-  <button mat-button [mat-dialog-close]="data.userId" cdkFocusInitial class="button-primary">Add</button>
+  <button mat-button cdkFocusInitial class="button-primary" (click)="addAppointment()">Add</button>
 </div>
 
 

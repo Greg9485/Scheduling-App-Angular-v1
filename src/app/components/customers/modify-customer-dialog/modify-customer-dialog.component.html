@@ -3,48 +3,35 @@
     <div class="row">
         <div class="col">
             <div class="row">
-                <label>Customer ID: </label><br>
-                <input matInput class="input-1" [(ngModel)]="data.id" disabled>
-            </div>
-
-            <div class="row">
                 <label>Customer Name: </label><br>
-                <input matInput class="input-1" [(ngModel)]="data.name">
+                <input matInput class="input-1" [(ngModel)]="data.customerName" style="width: 75%">
             </div>
 
             <div class="row">
                 <label>Address: </label><br>
-                <input matInput class="input-1" [(ngModel)]="data.address">
-            </div>
-
-            <div class="row">
-                <label>State/Province: </label><br>
-                <input matInput class="input-1" [(ngModel)]="data.stateProvince">
+                <input matInput class="input-1" [(ngModel)]="data.address" style="width: 75%">
             </div>
 
             <div class="row">
                 <label>Zip Code: </label><br>
-                <input matInput class="input-1" [(ngModel)]="data.zipCode">
+                <input matInput class="input-1" [(ngModel)]="data.zipCode" style="width: 75%">
             </div>
 
             <div class="row">
                 <label>Phone Number: </label><br>
-                <input matInput class="input-1" [(ngModel)]="data.phoneNumber">
+                <input matInput class="input-1" [(ngModel)]="data.phoneNumber" style="width: 75%">
             </div>
 
             <div class="row">
                 <label>Active: </label><br>
-                <input matInput class="input-1" [(ngModel)]="data.active">
+                <input matInput class="input-1" [(ngModel)]="data.isActive" style="width: 75%">
             </div>
-
-            
-
         </div>
     </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button class="button-secondary" (click)="onNoClick()">Cancel</button>
   &nbsp;
-  <button mat-button class="button-primary" [mat-dialog-close]="data.id" cdkFocusInitial>Add</button>
+  <button mat-button class="button-primary" cdkFocusInitial (click)="modifyCustomer()">Add</button>
 </div>
 
