@@ -76,7 +76,7 @@ export class ModifyDialogComponent {
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close("No Click");
   }
 
   updateAppointment(){

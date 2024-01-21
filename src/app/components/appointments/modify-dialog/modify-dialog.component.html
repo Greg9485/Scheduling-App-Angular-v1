@@ -4,7 +4,6 @@
         <div class="col">
             <div class="row">
                 <label>Employee: </label><br>
-                <!--input class="input-1" [(ngModel)]="userId"-->
                 <select class="input-1"  style="width: 75%" [(ngModel)]="this.employee">
                     <option disabled>--Select Employee--</option>
                     <option *ngFor="let e of employees" [ngValue]="e">{{e.employeeName}}</option>
@@ -13,7 +12,6 @@
 
             <div class="row">
                 <label>Customer: </label><br>
-                <!--input class="input-1" [(ngModel)]="userId"-->
                 <select class="input-1"  style="width: 75%" [(ngModel)]="this.customer">
                     <option disabled>--Select Customer--</option>
                     <option *ngFor="let c of customers" [ngValue]="c">{{c.customerName}}</option>
@@ -24,31 +22,35 @@
 
             <div class="row" >
                 <label>Appointment Title: </label><br>
-                <input matInput class="input-1" [(ngModel)]="this.appointmentTitle" style="width: 70%">
+                <input matInput class="input-1" [(ngModel)]="this.appointmentTitle" style="width: 72%">
             </div>
 
 
+            <br>
 
 
-            <div class="row">
+            <div class="grid-1">
                 <div class="row">
-                    <mat-label>Start Date/Time</mat-label>
+                    <div class="col">
+                        <mat-label>Start Date/Time</mat-label>                        
+                    </div>
+                    <div class="col">
+                        <input type="datetime-local" class="input-1" [(ngModel)]="startDateTimeString" >                            
+                    </div>
                 </div>
-
+    
+    
                 <div class="row">
-                    <input type="datetime-local" class="input-1" [(ngModel)]="startDateTimeString" >
+                    <div class="col">
+                        <mat-label>End Date/Time</mat-label>      
+                    </div>
+                    <div class="col">
+                        <input type="datetime-local" class="input-1" [(ngModel)]="endDateTimeString" >
+                    </div>    
                 </div>
             </div>
-
-            <div class="row">
-                <div class="row">
-                    <mat-label>End Date/Time</mat-label>
-                </div>
-                
-                <div class="row">
-                    <input type="datetime-local" class="input-1" [(ngModel)]="endDateTimeString" >
-                </div>
-            </div>
+        
+            <br>
 
         </div>
     </div>

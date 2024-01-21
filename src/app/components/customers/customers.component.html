@@ -45,6 +45,14 @@
     </div>
 
     <div>
+        <label *ngIf="this.showAddCanceledMessage" class="cancel-notification">Customer NOT added</label>
+    </div> 
+
+    <div>
         <label *ngIf="this.showModifiedMessage" class="success-notification">Customer successfully modified</label>
+    </div>
+
+    <div>
+        <label *ngIf="this.showModifiedCanceledMessage" class="cancel-notification">Customer NOT modified</label>
     </div>
 </div>

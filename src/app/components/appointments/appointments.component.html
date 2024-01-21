@@ -41,9 +41,16 @@
     </div>
 
     <div>
+        <label *ngIf="this.showAddFailedMessage" class="cancel-notification">Appointment NOT added</label>
+    </div>
+
+    <div>
         <label *ngIf="this.showModifiedMessage" class="success-notification">Appointment successfully modified</label>
     </div>
 
+    <div>
+        <label *ngIf="this.showNotModifiedMessage" class="cancel-notification">Appointment NOT modified</label>
+    </div>
 </div>
 
 

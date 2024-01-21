@@ -18,6 +18,8 @@ export class CustomersComponent implements OnInit {
   showAddedMessage: boolean = false;
   showModifiedMessage: boolean = false;
   showDeletedCanceledMessage: boolean = false;
+  showAddCanceledMessage: boolean = false;
+  showModifiedCanceledMessage: boolean = false;
   private gridApi!: GridApi<Customer>;  
   rowData: Customer[] = [];
   selectedAppointment: any;
@@ -64,8 +66,11 @@ export class CustomersComponent implements OnInit {
           this.showAddedMessage = false;
         }, 3000) 
        }else{
-        window.alert("Save failed.")
-      }
+        this.showAddCanceledMessage = true;
+        this.populateRowData();
+        setTimeout(() =>{
+          this.showAddCanceledMessage = false;
+        }, 3000)       }
     })
   }
 
@@ -118,7 +123,11 @@ export class CustomersComponent implements OnInit {
           this.showDeletedMessage = false;
         }, 3000)
       }else{
-        window.alert("Delete failed");
+        this.showDeletedCanceledMessage = true;
+        this.populateRowData();
+        setTimeout(() =>{
+          this.showDeletedCanceledMessage = false;
+        }, 3000)
       }
     });    
   }
@@ -152,11 +161,19 @@ export class CustomersComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.showModifiedMessage = true;
-      this.populateRowData();
-      setTimeout(() =>{
-        this.showModifiedMessage = false;
-      }, 3000)
+      if(result == "Success"){
+        this.showModifiedMessage = true;
+        this.populateRowData();
+        setTimeout(() =>{
+          this.showModifiedMessage = false;
+        }, 3000)  
+      }else{
+        this.showModifiedCanceledMessage = true;
+        this.populateRowData();
+        setTimeout(() =>{
+          this.showModifiedCanceledMessage = false;
+        }, 3000)  
+      }
     })
   }
 

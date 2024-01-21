@@ -19,28 +19,32 @@
 
             <div class="row">
                 <label>Appointment Title: </label><br>
-                <input class="input-1" [(ngModel)]="appointmentTitle">
+                <input class="input-1" [(ngModel)]="appointmentTitle" style="width: 72%">
             </div>
 
-            <div class="row">
-                <div class="row">
-                    <mat-label>Start Date/Time</mat-label>
-                </div>
+            <br>
 
+            <div class="grid-1">
                 <div class="row">
-                    <input type="datetime-local" class="input-1" [(ngModel)]="startDateTime" >
+                    <div class="col">
+                        <mat-label>Start Date/Time</mat-label>                        
+                    </div>
+                    <div class="col">
+                        <input type="datetime-local" class="input-1" [(ngModel)]="startDateTime" >                            
+                    </div>
+                </div>
+    
+    
+                <div class="row">
+                    <div class="col">
+                        <mat-label>End Date/Time</mat-label>      
+                    </div>
+                    <div class="col">
+                        <input type="datetime-local" class="input-1" [(ngModel)]="endDateTime" >
+                    </div>    
                 </div>
             </div>
-
-            <div class="row">
-                <div class="row">
-                    <mat-label>End Date/Time</mat-label>
-                </div>
-                
-                <div class="row">
-                    <input type="datetime-local" class="input-1" [(ngModel)]="endDateTime" >
-                </div>
-            </div>
+            <br>
         </div>
     </div>
 </div>

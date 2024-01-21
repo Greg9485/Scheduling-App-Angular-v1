@@ -20,6 +20,8 @@ export class AppointmentsComponent implements OnInit {
   showDeletedMessage: boolean = false;  
   showAddedMessage: boolean = false;
   showModifiedMessage: boolean = false;
+  showAddFailedMessage: boolean = false;
+  showNotModifiedMessage: boolean = false;
 
   columnDefs: any = [
     {headerName: 'Employee Name', field: 'employeeName', sortable: true, filter: true},
@@ -56,7 +58,7 @@ export class AppointmentsComponent implements OnInit {
 
   addAppointment(){
     const dialogRef = this.dialog.open(AddDialogComponent, {
-      width: '350px',
+      width: '65%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -67,7 +69,11 @@ export class AppointmentsComponent implements OnInit {
           this.showAddedMessage = false;
         }, 3000) 
        }else{
-        window.alert("Save failed.")
+        this.showAddFailedMessage = true;
+        this.populateRowData();
+        setTimeout(() =>{
+          this.showAddFailedMessage = false;
+        }, 3000)
       }
     })
   }
@@ -126,11 +132,20 @@ export class AppointmentsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.showModifiedMessage = true;
-      this.populateRowData();
-      setTimeout(() =>{
-        this.showModifiedMessage = false;
-      }, 3000)
+      console.log("Result: " + result)
+      if(result == "Success"){
+        this.showModifiedMessage = true;
+        this.populateRowData();
+        setTimeout(() =>{
+          this.showModifiedMessage = false;
+        }, 3000)  
+      }else if(result == undefined){
+        this.showNotModifiedMessage = true;
+        this.populateRowData();
+        setTimeout(() =>{
+          this.showNotModifiedMessage = false;
+        }, 3000)  
+      }
     })
   }
   
